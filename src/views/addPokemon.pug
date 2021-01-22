@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Document
+  body
+    nav
+      ul
+        li
+          a(href="/") Index
+          a(href="/add-pokemon") Añadir Pokemon
+    form(action="/add-pokemon" method="post")#form-add
+      label(for="name") PokeName
+      input(type="text" name="name")#name
+      input(type="submit")

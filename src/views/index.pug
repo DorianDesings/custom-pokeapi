@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+    body
+        nav
+            ul
+                li
+                    a(href="/add-pokemon") Añadir Pokemon
+        h1 CUSTOM POKEAPI
+            ul#pokemons-list
+                each pokemon in allPokemons
+                    li= pokemon.name
+                        button(data-id= pokemon.id) X
+        script(src="js/scripts.js")
