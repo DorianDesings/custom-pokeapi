@@ -20,7 +20,6 @@ controller.addPokemonView = (req, res) => {
 controller.addPokemon = async (req, res) => {
   try {
     const { name } = req.body;
-    // const name = req.body.name;
     const body = {
       name: name.toLowerCase().trim()
     };
