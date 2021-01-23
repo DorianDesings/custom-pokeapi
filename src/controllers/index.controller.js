@@ -19,11 +19,12 @@ controller.addPokemonView = (req, res) => {
 
 controller.addPokemon = async (req, res) => {
   try {
-    // body.name = body.name.toLowerCase().trim();
     const { name } = req.body;
+    // const name = req.body.name;
     const body = {
       name: name.toLowerCase().trim()
     };
+    await connection();
     await PokeModel.create(body);
     res.redirect('/');
   } catch (err) {
@@ -33,6 +34,7 @@ controller.addPokemon = async (req, res) => {
 
 controller.deletePokemon = async (req, res) => {
   try {
+    await connection();
     const id = req.params.id;
     await PokeModel.findByIdAndDelete(id, err => {
       if (err) {
@@ -41,7 +43,6 @@ controller.deletePokemon = async (req, res) => {
         res.json({ error: false });
       }
     });
-    // console.log(pokemonDelete);
   } catch (error) {
     console.error(error);
     res.status(404).json({ error: true });

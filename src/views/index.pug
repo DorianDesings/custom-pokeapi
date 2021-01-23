@@ -1,17 +1,27 @@
-<!DOCTYPE html>
-html(lang="es")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-    body
-        nav
-            ul
-                li
-                    a(href="/add-pokemon") Añadir Pokemon
-        h1 CUSTOM POKEAPI
-            ul#pokemons-list
-                each pokemon in allPokemons
-                    li= pokemon.name
-                        button(data-id= pokemon.id) X
-        script(src="js/scripts.js")
+doctype html
+html(lang='es')
+	head
+		meta(charset='UTF-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet' href='css/normalize.css')
+		link(rel='stylesheet' href='css/pokedex.css')
+		link(rel='stylesheet' href='css/card.css')
+		title Document
+	body
+		nav
+			ul
+				li
+					a(href='/add-pokemon') Añadir Pokemon
+		h1 CUSTOM POKEAPI
+		#pokedex.pokedex
+			each pokemon in allPokemons
+				.card-container
+					.card
+						.card__front
+							.card__img-container
+								img(src=pokemon.pngImage, alt='pokemon image')
+							.card__info
+								p.card__text= `${pokemon.number}-${pokemon.name}`
+						.card__back
+							.card__pokeball
+		script(src='js/scripts.js')
