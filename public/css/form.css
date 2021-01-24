@@ -1,1 +1,1 @@
-body{background-color:lightcoral;display:grid;transform:scale(2)}
+body{display:grid;grid-template-columns:repeat(2, 1fr);background-color:lightblue}body p{color:blue}

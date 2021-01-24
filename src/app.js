@@ -6,48 +6,40 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
+const morgan = require('morgan');
 
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require('express-autoprefixer');
 const sassMiddleware = require('node-sass-middleware');
 const postcssMiddleware = require('postcss-middleware');
 app.use(bodyParser.urlencoded({ extended: true }));
-// TEST SASS
+app.use(morgan('dev'));
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
 app.use(
   sassMiddleware({
-    /* Options */
     src: path.join(__dirname, 'scss'),
     dest: path.join(__dirname, '../public/css'),
     debug: true,
     outputStyle: 'compressed',
-    prefix: '/css' // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+    prefix: '/css'
   })
 );
 
 app.use(
+  '/css',
   postcssMiddleware({
-    plugins: [
-      /* Plugins */
-      autoprefixer({
-        /* Options */
-      })
-    ],
-    src: function (req) {
-      return path.join(__dirname + '../public', req.url);
-    }
+    src: req => req.url,
+    plugins: [autoprefixer({ browsers: ['last 2 versions'] })]
   })
 );
 
-//FIN TEST SASS
-
-app.use(express.static(__dirname + '/static'));
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
-
-// ROUTES
-app.use(require('./routes/index.route'));
-
 // STATIC FILES
 app.use(express.static(path.join(__dirname, '../public')));
+
+// ROUTES
+app.use(require('./routes/index.routes'));
 
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, '../public/404.html'));

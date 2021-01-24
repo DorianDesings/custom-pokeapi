@@ -1,5 +1,9 @@
 body {
-  background-color: lightcoral;
   display: grid;
-  transform: scale(2);
+  grid-template-columns: repeat(2, 1fr);
+  background-color: lightblue;
+
+  p {
+    color: blue;
+  }
 }
